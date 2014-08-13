@@ -1,0 +1,4 @@
+NAME bgpaint WINDOWAPI
+DESCRIPTION 'Backgroud Paint by G.Iachello'
+STACKSIZE 0x10000
+

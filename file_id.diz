@@ -1,0 +1,4 @@
+PM++ class library -- encapsulates the 
+OS/2 PM API. Compiles to a DLL with
+emx 0.9a version 0.16
+

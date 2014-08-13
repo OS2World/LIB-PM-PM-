@@ -1,0 +1,22 @@
+/* 
+
+
+	bg_paint.rc (emx+gcc) 
+
+	1995 Giovanni Iachello
+	This is freeware software. You can use or modify it as you wish,
+	provided that the part of code that I wrote remains freeware.
+	Freeware means that the source code must be available on request 
+	to anyone.
+	You must also include this notice in all files derived from this
+	file.
+
+
+*/
+
+#include <os2.h>
+#include "pmstdres.h"
+#include "bg_paint.h"
+
+ICON ID_BGPAINT bg_paint.ico
+

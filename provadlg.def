@@ -1,0 +1,4 @@
+NAME provadlg WINDOWAPI
+DESCRIPTION 'Prova Dlg by G.Iachello'
+STACKSIZE 0x10000
+

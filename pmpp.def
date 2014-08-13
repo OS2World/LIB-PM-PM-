@@ -1,0 +1,1072 @@
+LIBRARY PMPP INITINSTANCE
+SEGMENTS
+  PMPRIV CLASS 'DATA' NONSHARED
+  DATA32 CLASS 'DATA' SHARED
+  BSS32 CLASS 'BSS' SHARED
+EXPORTS
+
+; From pmsys.o
+
+  ; PMMessageQueue::PMMessageQueue(void)
+  "__14PMMessageQueue" @1
+
+  ; PMAnchorBlock::PMAnchorBlock(void)
+  "__13PMAnchorBlock" @2
+
+  ; PMAnchorBlock virtual table
+  "_vt$13PMAnchorBlock" @3
+
+  ; PMAnchorBlock::~PMAnchorBlock(void)
+  "_$_13PMAnchorBlock" @4
+
+  ; PMAnchorBlock::init(int)
+  "init__13PMAnchorBlocki" @5
+
+  ; PMAnchorBlock::uninit(void)
+  "uninit__13PMAnchorBlock" @6
+
+  ; PMApp::PMApp(PMAnchorBlock, PMMessageQueue, int, char **)
+  "__5PMAppG13PMAnchorBlockG14PMMessageQueueiPPc" @7
+
+  ; PMApp virtual table
+  "_vt$5PMApp" @8
+
+  ; PMApp::quit(int)
+  "quit__5PMAppi" @9
+
+  ; PMApp::run(void)
+  "run__5PMApp" @10
+
+  ; PMAnchorBlock::getMsg(_QMSG *, unsigned long, unsigned long, unsigned long)
+  "getMsg__13PMAnchorBlockP5_QMSGUlUlUl" @11
+
+  ; PMAnchorBlock::dispachMsg(_QMSG *)
+  "dispachMsg__13PMAnchorBlockP5_QMSG" @12
+
+  ; PMThread::PMThread(void *, int)
+  "__8PMThreadPvi" @13
+
+  ; PMThread virtual table
+  "_vt$8PMThread" @14
+
+  ; threadstart(void *)
+  "threadstart__FPv" @15
+
+  ; PMThread::~PMThread(void)
+  "_$_8PMThread" @16
+
+  ; PMThread::threadStore(void *)
+  "threadStore__8PMThreadPv" @17
+
+  ; PMThread::threadStore(void)
+  "threadStore__8PMThread" @18
+
+  ; PMThread::main(void *)
+  "main__8PMThreadPv" @19
+
+  ; PMWindowThread::PMWindowThread(void *, int, int)
+  "__14PMWindowThreadPvii" @20
+
+  ; PMWindowThread::PMAnchorBlock virtual table
+  "_vt$14PMWindowThread$13PMAnchorBlock" @21
+
+  ; PMWindowThread virtual table
+  "_vt$14PMWindowThread" @22
+
+  ; PMWindowThread::~PMWindowThread(void)
+  "_$_14PMWindowThread" @23
+
+  ; PMWindowThread::main(void *)
+  "main__14PMWindowThreadPv" @24
+
+  ; PMEventSemaphore::PMEventSemaphore(unsigned long, unsigned long)
+  "__16PMEventSemaphoreUlUl" @25
+
+  ; PMEventSemaphore::PMEventSemaphore(char const *, unsigned long, unsigned long)
+  "__16PMEventSemaphorePCcUlUl" @26
+
+  ; PMEventSemaphore::PMEventSemaphore(char const *, unsigned long *)
+  "__16PMEventSemaphorePCcPUl" @27
+
+  ; PMEventSemaphore::~PMEventSemaphore(void)
+  "_$_16PMEventSemaphore" @28
+
+  ; PMThread::wait(unsigned long)
+  "wait__8PMThreadUl" @29
+
+  ; PMThread::suspend(void)
+  "suspend__8PMThread" @30
+
+  ; PMThread::setPriority(unsigned long, unsigned long, long)
+  "setPriority__8PMThreadUlUll" @31
+
+  ; PMThread::resume(void)
+  "resume__8PMThread" @32
+
+  ; PMThread::kill(void)
+  "kill__8PMThread" @33
+
+  ; PMThread::failed(void)
+  "failed__8PMThread" @34
+
+  ; PMThread::ID(void)
+  "ID__8PMThread" @35
+
+  ; PMAnchorBlock::setHook(unsigned long, long, int (*)(...), unsigned long)
+  "setHook__13PMAnchorBlockUllPFe_iUl" @36
+
+  ; PMAnchorBlock::releaseHook(unsigned long, long, int (*)(...), unsigned long)
+  "releaseHook__13PMAnchorBlockUllPFe_iUl" @37
+
+  ; PMAnchorBlock::unionRect(_RECTL *, _RECTL *, _RECTL *)
+  "unionRect__13PMAnchorBlockP6_RECTLN21" @38
+
+  ; PMAnchorBlock::ptInRect(_RECTL *, _POINTL *)
+  "ptInRect__13PMAnchorBlockP6_RECTLP7_POINTL" @39
+
+  ; PMAnchorBlock::intersectRect(_RECTL *, _RECTL *, _RECTL *)
+  "intersectRect__13PMAnchorBlockP6_RECTLN21" @40
+
+  ; PMAnchorBlock::loadString(unsigned long, long, char *, unsigned long)
+  "loadString__13PMAnchorBlockUllPcUl" @41
+
+  ; PMAnchorBlock::loadMessage(unsigned long, long, char *, unsigned long)
+  "loadMessage__13PMAnchorBlockUllPcUl" @42
+
+  ; PMAnchorBlock::msgTime(void)
+  "msgTime__13PMAnchorBlock" @43
+
+  ; PMAnchorBlock::msgPos(void)
+  "msgPos__13PMAnchorBlock" @44
+
+  ; PMAnchorBlock::peekMsg(_QMSG *, unsigned long, unsigned long, unsigned long, unsigned long)
+  "peekMsg__13PMAnchorBlockP5_QMSGUlUlUlUl" @45
+
+  ; PMAnchorBlock::operator unsigned long(void)
+  "__opUl__13PMAnchorBlock" @46
+
+  ; PMAnchorBlock::PMAnchorBlock(unsigned long)
+  "__13PMAnchorBlockUl" @47
+
+; From pmwin.o
+
+  ; PMWndProc(unsigned long, unsigned long, void *, void *)
+  "PMWndProc__FUlUlPvT2" @48
+
+  ; PMWin::PMWin(unsigned long)
+  "__5PMWinUl" @49
+
+  ; PMWin virtual table
+  "_vt$5PMWin" @50
+
+  ; PMWin::PMWin(char const *, unsigned long)
+  "__5PMWinPCcUl" @51
+
+  ; PMWin::~PMWin(void)
+  "_$_5PMWin" @52
+
+  ; PMWin::createWin(void)
+  "createWin__5PMWin" @53
+
+  ; DoAssert(char const *, char const *, unsigned int)
+  "DoAssert__FPCcT0Ui" @54
+
+  ; PMWin::msgProc(PMEvent &)
+  "msgProc__5PMWinR7PMEvent" @55
+
+  ; PMWin::dispachEvent(PMEvent &)
+  "dispachEvent__5PMWinR7PMEvent" @56
+
+  ; PMWin::invalidate(unsigned long)
+  "invalidate__5PMWinUl" @57
+
+  ; PMWin::create(PMEvent &)
+  "create__5PMWinR7PMEvent" @58
+
+  ; PMWin::destroy(void)
+  "destroy__5PMWin" @59
+
+  ; PMWin::saveApplication(void)
+  "saveApplication__5PMWin" @60
+
+  ; PMWin::command(unsigned short, unsigned short)
+  "command__5PMWinUsUs" @61
+
+  ; PMWin::paint(void)
+  "paint__5PMWin" @62
+
+  ; PMWin::kbd(PMEvent &)
+  "kbd__5PMWinR7PMEvent" @63
+
+  ; PMWin::mouse(PMEvent &)
+  "mouse__5PMWinR7PMEvent" @64
+
+  ; PMWin::enable(void)
+  "enable__5PMWin" @65
+
+  ; PMWin::show(void)
+  "show__5PMWin" @66
+
+  ; PMWin::move(void)
+  "move__5PMWin" @67
+
+  ; PMWin::size(short, short)
+  "size__5PMWinss" @68
+
+  ; PMWin::activate(void)
+  "activate__5PMWin" @69
+
+  ; PMWin::setfocus(void)
+  "setfocus__5PMWin" @70
+
+  ; PMWin::help(PMEvent &)
+  "help__5PMWinR7PMEvent" @71
+
+  ; PMWin::helpmsg(PMEvent &)
+  "helpmsg__5PMWinR7PMEvent" @72
+
+  ; PMWin::timer(void)
+  "timer__5PMWin" @73
+
+  ; PMWin::closed(void)
+  "closed__5PMWin" @74
+
+  ; PMWin::other(PMEvent &)
+  "other__5PMWinR7PMEvent" @75
+
+  ; PMWin::close(void)
+  "close__5PMWin" @76
+
+  ; PMWin::destroyWin(void)
+  "destroyWin__5PMWin" @77
+
+  ; PMWin::initmenu(short, PMMenu *)
+  "initmenu__5PMWinsP6PMMenu" @78
+
+  ; PMWin::ptInClient(PMPoint &)
+  "ptInClient__5PMWinR7PMPoint" @79
+
+  ; PMMainWin::PMMainWin(char const *, unsigned long, PMHelpWin *)
+  "__9PMMainWinPCcUlP9PMHelpWin" @80
+
+  ; PMMainWin virtual table
+  "_vt$9PMMainWin" @81
+
+  ; PMMainWin::createWin(void)
+  "createWin__9PMMainWin" @82
+
+  ; PMWin::getHwnd(void)
+  "getHwnd__5PMWin" @83
+
+  ; PMWin::associateHelpInstance(unsigned long)
+  "associateHelpInstance__5PMWinUl" @84
+
+  ; PMMainWin::destroyWin(void)
+  "destroyWin__9PMMainWin" @85
+
+  ; PMMainWin::paint(void)
+  "paint__9PMMainWin" @86
+
+  ; PMMainWin::closed(void)
+  "closed__9PMMainWin" @87
+
+  ; PMWin::postMsg(unsigned long, void *, void *)
+  "postMsg__5PMWinUlPvT2" @88
+
+  ; PMMainWin::fileKillConfirm(void)
+  "fileKillConfirm__9PMMainWin" @89
+
+  ; PMMainWin::setTitleCaption(void)
+  "setTitleCaption__9PMMainWin" @90
+
+  ; PMWin::setFrameWindowText(char const *)
+  "setFrameWindowText__5PMWinPCc" @91
+
+  ; PMMainWin::command(unsigned short, unsigned short)
+  "command__9PMMainWinUsUs" @92
+
+  ; PMMainWin::setModified(unsigned long)
+  "setModified__9PMMainWinUl" @93
+
+  ; PMSubclassWin::PMSubclassWin(unsigned long, char const *, char const *, unsigned long, long, long, long, long, unsigned long, unsigned long, unsigned long, void *, void *)
+  "__13PMSubclassWinUlPCcT2UlllllUlUlUlPvT12_" @94
+
+  ; PMSubclassWin virtual table
+  "_vt$13PMSubclassWin" @95
+
+  ; PMSubclassWin::~PMSubclassWin(void)
+  "_$_13PMSubclassWin" @96
+
+  ; PMSubclassWin::createWin(void)
+  "createWin__13PMSubclassWin" @97
+
+  ; ErrBox(char const *,...)
+  "ErrBox__FPCce" @98
+
+  ; PMWin::msgBox(char const *, char const *,...)
+  "msgBox__5PMWinPCcT1e" @99
+
+  ; PMWin::sendMsg(unsigned long, void *, void *)
+  "sendMsg__5PMWinUlPvT2" @100
+
+  ; PMWin::queryEnd(void)
+  "queryEnd__5PMWin" @101
+
+  ; PMMainWin::~PMMainWin(void)
+  "_$_9PMMainWin" @102
+
+  ; PMMainWin::queryEnd(void)
+  "queryEnd__9PMMainWin" @103
+
+  ; PMMainWin::paint(PMPresSpace &)
+  "paint__9PMMainWinR11PMPresSpace" @104
+
+  ; PMMainWin::fileOpen(char const *)
+  "fileOpen__9PMMainWinPCc" @105
+
+  ; PMMainWin::fileSave(char const *)
+  "fileSave__9PMMainWinPCc" @106
+
+  ; PMMainWin::filePrint(void)
+  "filePrint__9PMMainWin" @107
+
+  ; PMMainWin::fileNew(void)
+  "fileNew__9PMMainWin" @108
+
+  ; PMMainWin::editCut(void)
+  "editCut__9PMMainWin" @109
+
+  ; PMMainWin::editCopy(void)
+  "editCopy__9PMMainWin" @110
+
+  ; PMMainWin::editPaste(void)
+  "editPaste__9PMMainWin" @111
+
+  ; PMMainWin::editDelete(void)
+  "editDelete__9PMMainWin" @112
+
+  ; PMMainWin::editUndo(void)
+  "editUndo__9PMMainWin" @113
+
+  ; PMMainWin::editRedo(void)
+  "editRedo__9PMMainWin" @114
+
+  ; PMMainWin::editClear(void)
+  "editClear__9PMMainWin" @115
+
+  ; PMMainWin::isFileModified(void)
+  "isFileModified__9PMMainWin" @116
+
+  ; PMWin::queryHelpInstance(void)
+  "queryHelpInstance__5PMWin" @117
+
+  ; PMWin::storeWindowPos(char const *, char const *, unsigned long)
+  "storeWindowPos__5PMWinPCcT1Ul" @118
+
+  ; PMWin::restoreWindowPos(char const *, char const *, unsigned long)
+  "restoreWindowPos__5PMWinPCcT1Ul" @119
+
+  ; PMWin::setWindowText(char const *)
+  "setWindowText__5PMWinPCc" @120
+
+  ; PMWin::setFramePos(unsigned long, long, long, long, long, unsigned long)
+  "setFramePos__5PMWinUlllllUl" @121
+
+  ; PMWin::setPos(unsigned long, long, long, long, long, unsigned long)
+  "setPos__5PMWinUlllllUl" @122
+
+  ; PMWin::setParent(unsigned long, unsigned long)
+  "setParent__5PMWinUlUl" @123
+
+  ; PMWin::setOwner(unsigned long)
+  "setOwner__5PMWinUl" @124
+
+  ; PMWin::queryWindowTextLenght(void)
+  "queryWindowTextLenght__5PMWin" @125
+
+  ; PMWin::queryWindowText(long, char *)
+  "queryWindowText__5PMWinlPc" @126
+
+  ; PMWin::queryFramePos(_SWP *)
+  "queryFramePos__5PMWinP4_SWP" @127
+
+  ; PMWin::queryPos(_SWP *)
+  "queryPos__5PMWinP4_SWP" @128
+
+  ; PMWin::resetCapture(unsigned long)
+  "resetCapture__5PMWinUl" @129
+
+  ; PMWin::setCapture(unsigned long)
+  "setCapture__5PMWinUl" @130
+
+  ; PMWin::queryFocus(unsigned long)
+  "queryFocus__5PMWinUl" @131
+
+  ; PMWin::queryCapture(unsigned long)
+  "queryCapture__5PMWinUl" @132
+
+  ; PMWin::isVisible(void)
+  "isVisible__5PMWin" @133
+
+  ; PMWin::isEnabled(void)
+  "isEnabled__5PMWin" @134
+
+  ; PMWin::isChild(unsigned long)
+  "isChild__5PMWinUl" @135
+
+  ; PMWin::getHwndFrame(void)
+  "getHwndFrame__5PMWin" @136
+
+  ; PMWin::operator unsigned long(void)
+  "__opUl__5PMWin" @137
+
+  ; PMWin::operator()(void)
+  "__cl__5PMWin" @138
+
+; From pmgpi.o
+
+  ; PMLogFont::PMLogFont(PMPresSpace &, char const *, long, long, unsigned short)
+  "__9PMLogFontR11PMPresSpacePCcllUs" @139
+
+  ; PMPresSpace::createLogFont(char const (const *)[8], long, _FATTRS const *)
+  "createLogFont__11PMPresSpacePCA8_CclPC7_FATTRS" @140
+
+  ; PMLogFont::PMLogFont(PMPresSpace &, _FATTRS *)
+  "__9PMLogFontR11PMPresSpaceP7_FATTRS" @141
+
+  ; PMMenu::PMMenu(void)
+  "__6PMMenu" @142
+
+  ; PMMenu::PMMenu(PMWin *)
+  "__6PMMenuP5PMWin" @143
+
+  ; PMMenu::PMMenu(unsigned long)
+  "__6PMMenuUl" @144
+
+  ; PMSystemMenu::PMSystemMenu(PMWin *)
+  "__12PMSystemMenuP5PMWin" @145
+
+  ; PMPopupMenu::PMPopupMenu(PMWin *, unsigned long)
+  "__11PMPopupMenuP5PMWinUl" @146
+
+  ; PMPopupMenu::popup(PMPoint &, unsigned long, unsigned long)
+  "popup__11PMPopupMenuR7PMPointUlUl" @147
+
+  ; PMRect::operator=(PMWin *)
+  "__as__6PMRectP5PMWin" @148
+
+  ; PMPresSpace::PMPresSpace(PMDeviceContext *, long, long, long, unsigned long)
+  "__11PMPresSpaceP15PMDeviceContextlllUl" @149
+
+  ; PMPresSpace virtual table
+  "_vt$11PMPresSpace" @150
+
+  ; PMDeviceContext::operator unsigned long(void)
+  "__opUl__15PMDeviceContext" @151
+
+  ; PMPresSpace::~PMPresSpace(void)
+  "_$_11PMPresSpace" @152
+
+  ; PMPresSpace::queryTextBox(char *, long, _POINTL *)
+  "queryTextBox__11PMPresSpacePclP7_POINTL" @153
+
+  ; PMPresSpace::queryTextBoxWidth(char *)
+  "queryTextBoxWidth__11PMPresSpacePc" @154
+
+  ; PMPresSpace::queryTextBoxHeight(char *)
+  "queryTextBoxHeight__11PMPresSpacePc" @155
+
+  ; PMWindowPresSpace::PMWindowPresSpace(PMWin *)
+  "__17PMWindowPresSpaceP5PMWin" @156
+
+  ; PMPresSpace::PMPresSpace(void)
+  "__11PMPresSpace" @157
+
+  ; PMWindowPresSpace virtual table
+  "_vt$17PMWindowPresSpace" @158
+
+  ; PMWindowPresSpace::~PMWindowPresSpace(void)
+  "_$_17PMWindowPresSpace" @159
+
+  ; PMMicroCachedPresSpace::PMMicroCachedPresSpace(PMWin *)
+  "__22PMMicroCachedPresSpaceP5PMWin" @160
+
+  ; PMMicroCachedPresSpace virtual table
+  "_vt$22PMMicroCachedPresSpace" @161
+
+  ; PMMicroCachedPresSpace::~PMMicroCachedPresSpace(void)
+  "_$_22PMMicroCachedPresSpace" @162
+
+  ; PMDeviceContext::PMDeviceContext(unsigned long, unsigned long)
+  "__15PMDeviceContextUlUl" @163
+
+  ; PMDeviceContext virtual table
+  "_vt$15PMDeviceContext" @164
+
+  ; PMDeviceContext::PMDeviceContext(unsigned long, long, char const *, long, char **, unsigned long)
+  "__15PMDeviceContextUllPCclPPcUl" @165
+
+  ; PMDeviceContext::PMDeviceContext(unsigned long)
+  "__15PMDeviceContextUl" @166
+
+  ; PMDeviceContext::~PMDeviceContext(void)
+  "_$_15PMDeviceContext" @167
+
+  ; PMDeviceContext::open(long, char const *, long, char **, unsigned long)
+  "open__15PMDeviceContextlPCclPPcUl" @168
+
+  ; PMMemoryDC::PMMemoryDC(unsigned long)
+  "__10PMMemoryDCUl" @169
+
+  ; PMMemoryDC virtual table
+  "_vt$10PMMemoryDC" @170
+
+  ; PMMemoryDC::PMMemoryDC(unsigned long, long, unsigned long)
+  "__10PMMemoryDCUllUl" @171
+
+  ; PMMemoryDC::~PMMemoryDC(void)
+  "_$_10PMMemoryDC" @172
+
+  ; PMPrinterDC::PMPrinterDC(unsigned long)
+  "__11PMPrinterDCUl" @173
+
+  ; PMPrinterDC virtual table
+  "_vt$11PMPrinterDC" @174
+
+  ; PMPrinterDC::PMPrinterDC(unsigned long, long, char **, unsigned long)
+  "__11PMPrinterDCUllPPcUl" @175
+
+  ; PMPrinterDC::~PMPrinterDC(void)
+  "_$_11PMPrinterDC" @176
+
+  ; PMPrinterDC::getInformation(char *, char *, _DEVOPENSTRUC *)
+  "getInformation__11PMPrinterDCPcT1P13_DEVOPENSTRUC" @177
+
+  ; PMPrinterDC::open(void)
+  "open__11PMPrinterDC" @178
+
+  ; PMPrinterDC::startDoc(char *)
+  "startDoc__11PMPrinterDCPc" @179
+
+  ; PMPrinterDC::endDoc(char *)
+  "endDoc__11PMPrinterDCPc" @180
+
+  ; PMPrinterDC::newFrame(void)
+  "newFrame__11PMPrinterDC" @181
+
+  ; PMPrinterDC::abortDoc(void)
+  "abortDoc__11PMPrinterDC" @182
+
+  ; PMPresSpace::charStringAt(_POINTL const *, long, char const *)
+  "charStringAt__11PMPresSpacePC7_POINTLlPCc" @183
+
+  ; PMPresSpace::charString(long, char const *)
+  "charString__11PMPresSpacelPCc" @184
+
+  ; PMPresSpace::setCharSet(PMLogFont &)
+  "setCharSet__11PMPresSpaceR9PMLogFont" @185
+
+  ; PMPresSpace::setCharMode(long)
+  "setCharMode__11PMPresSpacel" @186
+
+  ; PMPresSpace::setCharExtra(long)
+  "setCharExtra__11PMPresSpacel" @187
+
+  ; PMPresSpace::setCharDirection(long)
+  "setCharDirection__11PMPresSpacel" @188
+
+  ; PMPresSpace::setCharBreakExtra(long)
+  "setCharBreakExtra__11PMPresSpacel" @189
+
+  ; PMPresSpace::setCharBox(_SIZEF const *)
+  "setCharBox__11PMPresSpacePC6_SIZEF" @190
+
+  ; PMPresSpace::setCharAngle(_GRADIENTL const *)
+  "setCharAngle__11PMPresSpacePC10_GRADIENTL" @191
+
+  ; PMPresSpace::setCharSet(long)
+  "setCharSet__11PMPresSpacel" @192
+
+  ; PMPresSpace::setPageViewport(_RECTL const *)
+  "setPageViewport__11PMPresSpacePC6_RECTL" @193
+
+  ; PMPresSpace::set(_SIZEL *, unsigned long)
+  "set__11PMPresSpaceP6_SIZELUl" @194
+
+  ; PMPresSpace::queryTextBox(long, char *, long, _POINTL *)
+  "queryTextBox__11PMPresSpacelPclP7_POINTL" @195
+
+  ; PMPresSpace::queryPageViewport(_RECTL *)
+  "queryPageViewport__11PMPresSpaceP6_RECTL" @196
+
+  ; PMPresSpace::queryFontMetrics(_FONTMETRICS *)
+  "queryFontMetrics__11PMPresSpaceP12_FONTMETRICS" @197
+
+  ; PMPresSpace::queryCharBox(_SIZEF *)
+  "queryCharBox__11PMPresSpaceP6_SIZEF" @198
+
+  ; PMPresSpace::queryDevice(void)
+  "queryDevice__11PMPresSpace" @199
+
+  ; PMPresSpace::intersectClipRectangle(_RECTL const *)
+  "intersectClipRectangle__11PMPresSpacePC6_RECTL" @200
+
+  ; PMPresSpace::box(long, _POINTL *, long, long)
+  "box__11PMPresSpacelP7_POINTLll" @201
+
+  ; PMPresSpace::setMix(long)
+  "setMix__11PMPresSpacel" @202
+
+  ; PMPresSpace::move(_POINTL *)
+  "move__11PMPresSpaceP7_POINTL" @203
+
+  ; PMPresSpace::line(_POINTL *)
+  "line__11PMPresSpaceP7_POINTL" @204
+
+  ; PMPresSpace::fillRect(_RECTL *, long)
+  "fillRect__11PMPresSpaceP6_RECTLl" @205
+
+  ; PMPresSpace::drawText(long, char const *, _RECTL *, long, long, unsigned long)
+  "drawText__11PMPresSpacelPCcP6_RECTLllUl" @206
+
+  ; PMPresSpace::save(void)
+  "save__11PMPresSpace" @207
+
+  ; PMPresSpace::restore(long)
+  "restore__11PMPresSpacel" @208
+
+  ; PMPresSpace::setStopDraw(long)
+  "setStopDraw__11PMPresSpacel" @209
+
+  ; PMPresSpace::drawSegment(long)
+  "drawSegment__11PMPresSpacel" @210
+
+  ; PMPresSpace::closeSegment(void)
+  "closeSegment__11PMPresSpace" @211
+
+  ; PMPresSpace::openSegment(long)
+  "openSegment__11PMPresSpacel" @212
+
+  ; PMPresSpace::setDrawingMode(long)
+  "setDrawingMode__11PMPresSpacel" @213
+
+  ; PMPresSpace::setLineType(long)
+  "setLineType__11PMPresSpacel" @214
+
+  ; PMPresSpace::setColor(long)
+  "setColor__11PMPresSpacel" @215
+
+  ; PMPresSpace::operator unsigned long(void)
+  "__opUl__11PMPresSpace" @216
+
+  ; PMDeviceContext::queryCaps(long, long, long *)
+  "queryCaps__15PMDeviceContextllPl" @217
+
+  ; PMDeviceContext::escape(long, long, char *, long *, char *)
+  "escape__15PMDeviceContextllPcPlT3" @218
+
+  ; PMDeviceContext::close(void)
+  "close__15PMDeviceContext" @219
+
+; From pmdlg.o
+
+  ; PMDlgProc(unsigned long, unsigned long, void *, void *)
+  "PMDlgProc__FUlUlPvT2" @220
+
+  ; PMControl::PMControl(unsigned long, void *, int, int)
+  "__9PMControlUlPvii" @221
+
+  ; PMControl virtual table
+  "_vt$9PMControl" @222
+
+  ; PMControl::destroyWin(void)
+  "destroyWin__9PMControl" @223
+
+  ; PMControl::createWin(void)
+  "createWin__9PMControl" @224
+
+  ; PMButton::PMButton(unsigned long, void *, int, int)
+  "__8PMButtonUlPvii" @225
+
+  ; PMButton virtual table
+  "_vt$8PMButton" @226
+
+  ; PMButton::get(void)
+  "get__8PMButton" @227
+
+  ; PMButton::set(void)
+  "set__8PMButton" @228
+
+  ; PMRadioButtonGroup::PMRadioButtonGroup(unsigned long, void *, int, int)
+  "__18PMRadioButtonGroupUlPvii" @229
+
+  ; PMRadioButtonGroup virtual table
+  "_vt$18PMRadioButtonGroup" @230
+
+  ; PMRadioButtonGroup::get(void)
+  "get__18PMRadioButtonGroup" @231
+
+  ; PMRadioButtonGroup::queryIndex(void)
+  "queryIndex__18PMRadioButtonGroup" @232
+
+  ; PMRadioButtonGroup::set(void)
+  "set__18PMRadioButtonGroup" @233
+
+  ; PMCheckBox::PMCheckBox(unsigned long, void *, int, int)
+  "__10PMCheckBoxUlPvii" @234
+
+  ; PMCheckBox virtual table
+  "_vt$10PMCheckBox" @235
+
+  ; PMCheckBox::get(void)
+  "get__10PMCheckBox" @236
+
+  ; PMButton::queryCheck(void)
+  "queryCheck__8PMButton" @237
+
+  ; PMCheckBox::set(void)
+  "set__10PMCheckBox" @238
+
+  ; PMButton::setCheck(unsigned short)
+  "setCheck__8PMButtonUs" @239
+
+  ; PMEntryField::PMEntryField(unsigned long, void *, int, int)
+  "__12PMEntryFieldUlPvii" @240
+
+  ; PMEntryField virtual table
+  "_vt$12PMEntryField" @241
+
+  ; PMEntryField::get(void)
+  "get__12PMEntryField" @242
+
+  ; PMEntryField::set(void)
+  "set__12PMEntryField" @243
+
+  ; PMMultiLineEdit::PMMultiLineEdit(unsigned long, void *, int, int)
+  "__15PMMultiLineEditUlPvii" @244
+
+  ; PMMultiLineEdit virtual table
+  "_vt$15PMMultiLineEdit" @245
+
+  ; PMMultiLineEdit::get(void)
+  "get__15PMMultiLineEdit" @246
+
+  ; PMMultiLineEdit::set(void)
+  "set__15PMMultiLineEdit" @247
+
+  ; PMListBox::PMListBox(unsigned long, void *, int, int)
+  "__9PMListBoxUlPvii" @248
+
+  ; PMListBox virtual table
+  "_vt$9PMListBox" @249
+
+  ; PMListBox::~PMListBox(void)
+  "_$_9PMListBox" @250
+
+  ; PMListBox::get(void)
+  "get__9PMListBox" @251
+
+  ; PMListBox::set(void)
+  "set__9PMListBox" @252
+
+  ; PMValueSet::PMValueSet(unsigned long, void *, int, int)
+  "__10PMValueSetUlPvii" @253
+
+  ; PMValueSet virtual table
+  "_vt$10PMValueSet" @254
+
+  ; PMValueSet::get(void)
+  "get__10PMValueSet" @255
+
+  ; PMValueSet::querySelectedItem(void)
+  "querySelectedItem__10PMValueSet" @256
+
+  ; PMValueSet::set(void)
+  "set__10PMValueSet" @257
+
+  ; PMValueSet::selectItem(void *)
+  "selectItem__10PMValueSetPv" @258
+
+  ; PMSpinButton::PMSpinButton(unsigned long, void *, int, int)
+  "__12PMSpinButtonUlPvii" @259
+
+  ; PMSpinButton virtual table
+  "_vt$12PMSpinButton" @260
+
+  ; PMSpinButton::get(void)
+  "get__12PMSpinButton" @261
+
+  ; PMSpinButton::queryValue(void *, unsigned short, unsigned short)
+  "queryValue__12PMSpinButtonPvUsUs" @262
+
+  ; PMSpinButton::set(void)
+  "set__12PMSpinButton" @263
+
+  ; PMSpinButton::setCurrentValue(long)
+  "setCurrentValue__12PMSpinButtonl" @264
+
+  ; PMScrollBar::PMScrollBar(unsigned long, void *, int, int)
+  "__11PMScrollBarUlPvii" @265
+
+  ; PMScrollBar virtual table
+  "_vt$11PMScrollBar" @266
+
+  ; PMScrollBar::PMScrollBar(PMWin *, int *, int)
+  "__11PMScrollBarP5PMWinPii" @267
+
+  ; PMScrollBar::get(void)
+  "get__11PMScrollBar" @268
+
+  ; PMScrollBar::queryPos(void)
+  "queryPos__11PMScrollBar" @269
+
+  ; PMScrollBar::set(void)
+  "set__11PMScrollBar" @270
+
+  ; PMScrollBar::setPos(short)
+  "setPos__11PMScrollBars" @271
+
+  ; PMVertScrollBar::PMVertScrollBar(PMWin *, int *)
+  "__15PMVertScrollBarP5PMWinPi" @272
+
+  ; PMHorizScrollBar::PMHorizScrollBar(PMWin *, int *)
+  "__16PMHorizScrollBarP5PMWinPi" @273
+
+  ; PMDialog::PMDialog(unsigned long, unsigned long)
+  "__8PMDialogUlUl" @274
+
+  ; PMDialog virtual table
+  "_vt$8PMDialog" @275
+
+  ; PMDialog::~PMDialog(void)
+  "_$_8PMDialog" @276
+
+  ; PMDialog::init(void)
+  "init__8PMDialog" @277
+
+  ; PMDialog::createWin(void)
+  "createWin__8PMDialog" @278
+
+  ; PMDialog::destroyWin(void)
+  "destroyWin__8PMDialog" @279
+
+  ; PMDialog::dispachEvent(PMEvent &)
+  "dispachEvent__8PMDialogR7PMEvent" @280
+
+  ; PMDialog::control(short, short)
+  "control__8PMDialogss" @281
+
+  ; PMDialog::initdlg(void)
+  "initdlg__8PMDialog" @282
+
+  ; PMDialog::command(unsigned short, unsigned short)
+  "command__8PMDialogUsUs" @283
+
+  ; PMModalDialog::PMModalDialog(unsigned long, unsigned long, unsigned long, PMControlMap *, void *)
+  "__13PMModalDialogUlUlUlP12PMControlMapPv" @284
+
+  ; PMModalDialog virtual table
+  "_vt$13PMModalDialog" @285
+
+  ; PMModalDialog::controlFromID(int)
+  "controlFromID__13PMModalDialogi" @286
+
+  ; PMModalDialog::~PMModalDialog(void)
+  "_$_13PMModalDialog" @287
+
+  ; PMModalDialog::init(void)
+  "init__13PMModalDialog" @288
+
+  ; PMModalDialog::updateControls(void)
+  "updateControls__13PMModalDialog" @289
+
+  ; PMModalDialog::updateObject(void)
+  "updateObject__13PMModalDialog" @290
+
+  ; PMModalDialog::createWin(void)
+  "createWin__13PMModalDialog" @291
+
+  ; PMModalDialog::command(unsigned short, unsigned short)
+  "command__13PMModalDialogUsUs" @292
+
+  ; PMModelessDialog::createWin(void)
+  "createWin__16PMModelessDialog" @293
+
+  ; PMFontDialog::PMFontDialog(unsigned long, unsigned long, _FONTMETRICS *, unsigned long, char *, char *)
+  "__12PMFontDialogUlUlP12_FONTMETRICSUlPcT5" @294
+
+  ; PMFontDialog virtual table
+  "_vt$12PMFontDialog" @295
+
+  ; PMFontDialog::~PMFontDialog(void)
+  "_$_12PMFontDialog" @296
+
+  ; PMFontDialog::createWin(void)
+  "createWin__12PMFontDialog" @297
+
+  ; PMFontDlgProc(unsigned long, unsigned long, void *, void *)
+  "PMFontDlgProc__FUlUlPvT2" @298
+
+  ; PMFileDialog::PMFileDialog(unsigned long, unsigned long, char *, char *, char *, unsigned long)
+  "__12PMFileDialogUlUlPcN23Ul" @299
+
+  ; PMFileDialog virtual table
+  "_vt$12PMFileDialog" @300
+
+  ; PMFileDialog::~PMFileDialog(void)
+  "_$_12PMFileDialog" @301
+
+  ; PMFileDialog::createWin(void)
+  "createWin__12PMFileDialog" @302
+
+  ; PMFileDlgProc(unsigned long, unsigned long, void *, void *)
+  "PMFileDlgProc__FUlUlPvT2" @303
+
+  ; PMModelessDialog virtual table
+  "_vt$16PMModelessDialog" @304
+
+  ; PMControl::sendMsg(unsigned long, void *, void *)
+  "sendMsg__9PMControlUlPvT2" @305
+
+  ; PMFileDialog::operator _FILEDLG(void)
+  "__op8_FILEDLG__12PMFileDialog" @306
+
+  ; PMFontDialog::operator _FONTDLG(void)
+  "__op8_FONTDLG__12PMFontDialog" @307
+
+  ; PMModelessDialog::PMModelessDialog(unsigned long, unsigned long, unsigned long, PMControlMap *, void *)
+  "__16PMModelessDialogUlUlUlP12PMControlMapPv" @308
+
+  ; PMScrollBar::setThumbSize(short, short)
+  "setThumbSize__11PMScrollBarss" @309
+
+  ; PMScrollBar::setScrollBar(short, short, short)
+  "setScrollBar__11PMScrollBarsss" @310
+
+  ; PMScrollBar::queryRangeMax(void)
+  "queryRangeMax__11PMScrollBar" @311
+
+  ; PMScrollBar::queryRangeMin(void)
+  "queryRangeMin__11PMScrollBar" @312
+
+  ; PMScrollBar::New(unsigned long, void *, int, int)
+  "New__11PMScrollBarUlPvii" @313
+
+  ; PMListBox::queryItemTextLenght(short)
+  "queryItemTextLenght__9PMListBoxs" @314
+
+  ; PMListBox::queryItemText(short, char *, short)
+  "queryItemText__9PMListBoxsPcs" @315
+
+  ; PMListBox::querySelection(void)
+  "querySelection__9PMListBox" @316
+
+  ; PMListBox::queryCount(void)
+  "queryCount__9PMListBox" @317
+
+  ; PMListBox::insertItem(short, char *)
+  "insertItem__9PMListBoxsPc" @318
+
+  ; PMListBox::deleteAll(void)
+  "deleteAll__9PMListBox" @319
+
+  ; PMListBox::deleteItem(short)
+  "deleteItem__9PMListBoxs" @320
+
+  ; PMListBox::New(unsigned long, void *, int, int)
+  "New__9PMListBoxUlPvii" @321
+
+  ; PMSpinButton::spinUp(unsigned long)
+  "spinUp__12PMSpinButtonUl" @322
+
+  ; PMSpinButton::spinDown(unsigned long)
+  "spinDown__12PMSpinButtonUl" @323
+
+  ; PMSpinButton::setTextLimit(unsigned short)
+  "setTextLimit__12PMSpinButtonUs" @324
+
+  ; PMSpinButton::setMaster(unsigned long)
+  "setMaster__12PMSpinButtonUl" @325
+
+  ; PMSpinButton::setLimits(unsigned long, unsigned long)
+  "setLimits__12PMSpinButtonUlUl" @326
+
+  ; PMSpinButton::setArray(char **, unsigned short)
+  "setArray__12PMSpinButtonPPcUs" @327
+
+  ; PMSpinButton::queryLimits(unsigned long, unsigned long)
+  "queryLimits__12PMSpinButtonUlUl" @328
+
+  ; PMSpinButton::New(unsigned long, void *, int, int)
+  "New__12PMSpinButtonUlPvii" @329
+
+  ; PMValueSet::setItem(unsigned short, unsigned short, void *)
+  "setItem__10PMValueSetUsUsPv" @330
+
+  ; PMValueSet::selectItem(unsigned short, unsigned short)
+  "selectItem__10PMValueSetUsUs" @331
+
+  ; PMValueSet::queryItem(void)
+  "queryItem__10PMValueSet" @332
+
+  ; PMValueSet::New(unsigned long, void *, int, int)
+  "New__10PMValueSetUlPvii" @333
+
+  ; PMMultiLineEdit::New(unsigned long, void *, int, int)
+  "New__15PMMultiLineEditUlPvii" @334
+
+  ; PMEntryField::New(unsigned long, void *, int, int)
+  "New__12PMEntryFieldUlPvii" @335
+
+  ; PMCheckBox::New(unsigned long, void *, int, int)
+  "New__10PMCheckBoxUlPvii" @336
+
+  ; PMRadioButtonGroup::New(unsigned long, void *, int, int)
+  "New__18PMRadioButtonGroupUlPvii" @337
+
+  ; PMButton::click(unsigned short)
+  "click__8PMButtonUs" @338
+
+  ; PMButton::setHilite(unsigned short)
+  "setHilite__8PMButtonUs" @339
+
+  ; PMButton::queryHilite(void)
+  "queryHilite__8PMButton" @340
+
+  ; PMButton::New(unsigned long, void *, int, int)
+  "New__8PMButtonUlPvii" @341
+
+  ; PMControl::setText(char const *)
+  "setText__9PMControlPCc" @342
+
+  ; PMControl::setShort(unsigned short, unsigned long)
+  "setShort__9PMControlUsUl" @343
+
+  ; PMControl::queryTextLenght(void)
+  "queryTextLenght__9PMControl" @344
+
+  ; PMControl::queryText(long, char *)
+  "queryText__9PMControllPc" @345
+
+  ; PMControl::queryShort(short *, unsigned long)
+  "queryShort__9PMControlPsUl" @346
+
+; From pmhelp.o
+
+  ; PMHelpWin::PMHelpWin(char *, char *, unsigned short, unsigned long)
+  "__9PMHelpWinPcT1UsUl" @347
+
+  ; PMHelpWin virtual table
+  "_vt$9PMHelpWin" @348
+
+  ; PMHelpWin::PMHelpWin(char *, char *, _HELPTABLE *, unsigned long)
+  "__9PMHelpWinPcT1P10_HELPTABLEUl" @349
+
+  ; PMHelpWin::createWin(void)
+  "createWin__9PMHelpWin" @350
+
+  ; PMHelpWin::destroyWin(void)
+  "destroyWin__9PMHelpWin" @351
+
+  ; PMHelpWin::~PMHelpWin(void)
+  "_$_9PMHelpWin" @352

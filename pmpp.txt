@@ -1,0 +1,387 @@
+
+
+
+
+	PM++
+	
+	Version 0.08
+	11-26-1994
+
+	Version 0.15
+	10-03-1995
+
+	Version 0.16
+	04-25-1996
+	
+	Giovanni Iachello
+
+	A freeware class library for the Presentation Manager API
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	1. Introduction
+	
+	This manual page is written in my terrible english, but  considering
+that "Real Programmers Don't Read Manuals", I feel it's enough.  PM++ is
+a freeware class library that encapsulates some of the OS/2 Presentation
+Manager API calls.  I developed it using the emx distribution of the GNU
+C++  Compiler with the general idea of writing some support programs for
+programmers who want to  write presentation manager applications without
+buying  expensive  compilers.   It  is  obvious  that  for  professional
+applications some tools distributed with  the  commercial  packages  are
+needed  (particulary  the  help  compiler,  CASE tools etc etc), but for
+normal, small, programs emx should be sufficient.
+
+	With this idea the first  step  was  finding  out what is missing to
+emx's PM support.  This led me to a class library to encapsulate the  PM
+API.
+
+	My  library  is  similar,  in the general design, to Paul DiLascia's
+Windows++ library: it's simple, small,  and  adds only a very thin layer
+between OS/2 and C++ programs to PM  applications,  to  the  benefit  of
+effincency and size.  It is compiled in a 32-bit DLL, to save disk space
+on multiple, or different, programs that use it.
+
+
+
+	2. Support Classes
+	
+	There  is a certain number of support classes, which make it easy to
+deal with some of  the  most  used  PM  data  types and structures.  For
+example there is a PMPoint class which derives from the POINTL structure
+and overloads the +, -, * operators, with their obvious  functions.   It
+is  possible  to  pass  a  PMPoint structure to an PM API function which
+expects a PPOINTL pointer, and  there  are inline functions to query the
+single members of the internal POINTL structures (x and  y).   There  is
+also  a  PMRect class which is very similar to the PMPoint class, except
+for the fact that the PM structure it encapsulates is a RECTL.
+
+	Then there are the  PMAnchorBlock, PMMessageQueue and PMApp classes;
+the first two classes contatin respectivly a HAB and a HMQ, and add some
+special constructors and 'dumb' inline functions  that  mirror  PM  APIs
+which  refer to the HAB or HMQ.  (For example WinGetMsg, etc.) The PMApp
+class is the main class for  a PM++ application and contains the command
+line parameters,  a  PMAnchorBlock  and  a  PMMessageQueue,  and  a  few
+functions  to  process  the  window  messages  of the application's main
+thread.  With these classes  the  main()  function of a PM++ application
+can be as simple as:
+
+	PMApp *App;
+
+	int main (int argc,char* argv[])
+	{
+		PMAnchorBlock ab;
+		PMMessageQueue mq;
+		ab.init();
+		mq.create(ab);
+		
+		App=new PMApp(ab,mq,argc,argv);
+	
+		PMWin * w=new PMWin(ab);
+		w->createWin();
+		
+		App->run();
+	
+		w->destroyWin();
+	
+		mq.destroy();
+		ab.uninit();
+	
+		return (0);
+	}
+
+	The PMIniProfile class eases the access to the Profile files (Prf...
+APIs).
+
+	The PMThread class automatically  creates  a  new thread in the PM++
+application.  Using a clever :) hack the thread procedure is  a  virtual
+member  of  PMThread; this makes it possible to add thread instance data
+by simply deriving a subclass from PMThread and adding data fields.  The
+main procedure of the  derived  class  can  access to those data members
+just as if it were a normal member of the derived class.  I  added  also
+support  for the non-standard thread instance data functions supplied by
+the emx library,  and  a  series  of  functions  to  change the thread's
+settings.
+
+	The PMWindowThread is  very  similar  to  a  normal thread; the only
+difference is that it builds automatically a PMAnchorBlock,  simplifying
+the implementation of threads using some of the PM APIs.  It is possible
+to  use  PMWindowThread  to  write  printer threads, like in the example
+program, or slow window drawing threads.
+
+	The PMEvent structure encapsulates  the message data normally passed
+to the window message procedure, plus a PCHRMSG and a  PMSEMSG  to  ease
+access  to  the  CHRMSG  and  MSEMSG  structures passed with WM_CHAR and
+WM_mouse messages.  The ret field is used to return a MRESULT value from
+message handling functions.
+
+
+
+	3. Window Class Hierarchy
+	
+	The base class is obviously PMWin: this class contains some data  (a
+PMAnchorBlock, the window handle, the frame window handle, and a pointer
+to  a  CreateArgs  structure, which is used during the window creation).
+The PM window is  not  created  in  the constructor: only the CreateArgs
+structure is filled.  The PM  window  is  than  created  by  a  separate
+functions.   With this hack it is possible for derived classes to change
+some CreateArgs in the constructor  before  the window is created.  Once
+allocated with the new operator,  a  PMWin  is  never  deleted:  when  a
+WM_DESTROY  message  arrives  to the window message procedure, the PMWin
+object is automatically deleted by the  PM++ system.  There are a lot of
+inline functions to hide the PM APIs that refer  to  the  window  handle
+(HWND),  and  some  inline  functions  to query the internal data of the
+PMWin class (the HWND etc.)  There  is  also a certain number of virtual
+functions for processing the most common messages (WM_PAINT, WM_COMMAND,
+WM_CHAR...).  All other messages are processed in the other() function.
+
+	The PMWin object (and all derived classes) is connected to the  HWND
+troughall  the  whole  system  with  the  typical  WinSet/QueryWindowPtr
+method,  with  the PMWin pointer stored in the QWP_USER position (offset
+0).  This lets the standard  C  window procedure call always the message
+dispacher routine of the right PMWin  object,  without  allocating  more
+window instance data.
+
+	PMWin  is  the  base  class  for PMMainWin, which adds some standard
+functions for main  application  window  (special  menu selections: file
+open, file new, etc., and a special version of the paint function  which
+gets  a  ready-to-use  referece to a PMPresSpace (the PM++ equivalent of
+the HPS).
+
+	The message processing virtual  functions  must return FALSE if they
+don't process the message (so that the message dispatcher will call  the
+default PM routine), or TRUE if they do.  The return code of the message
+processing  (MRESULT  in  PM  jargon)  can  be set by the message return
+function trough the ret field of the PMEvent structure.
+
+	The PMSubclassWin class is  a  special  window class that permits to
+create   PMWindow   objects   for    subclassed    windows    via    the
+WinSubclassWindow.   The  only  difference  from the normal PMWin is the
+constructor and the createWin function, while all the other parts of the
+PMWin class work just as usual.
+
+	The PMMenu class load and popups menus; an example of how to uses it
+can be found in the Dialog Editor program.
+
+
+	4. The Graphics Interface
+	
+	The PMPointer class  is  used  to  access  automatically the pointer
+handling functions of the PM API: WinLoadPointer and WinSetPointer.   It
+is  possible to load a pointer with the constructor and to set it as the
+system pointer using the  set  routine.   The reset routine restores the
+arrow as the default pointer.
+
+	The PMDeviceContext class permits to open, handle, and close  Device
+Contexts.   This  is  the  base class for the PMPrinterDC and PMMemoryDC
+classes which automatically create a  DC  for  the default printer and a
+memory device context compatible to the supplied  DC.   The  PMPrinterDC
+offers  also  functions to call the system setup dialog for the printer,
+to start a document and to end it.
+
+	The PMPresSpace class encapsulates some of the Gpi...  functions and
+comes in various flavors: PMWindowPresSpace (a PS obtained from a Window
+handle,  used   by   the   paint   message   processing   routine),  and
+PMMicroCachedPresSpace (a m.c.  PS also obtained from a Window handle.),
+and PMPresSpace, connected to a supplied PMDeviceContext.
+
+	Printing is very easy with these supplied classes: a sample printout
+can be produced with as little code as:
+
+	PMPrinterDC printer(hab); // create an instance of a PMPrinterDC
+	printer.open();             // open the DC
+	printer.startDoc("Test Document");
+
+	PMPresSpace *ptr=new
+	PMPresSpace(&printer, 1000, 1000,
+		PU_ARBITRARY|PU_LOENGLISH|GPIF_DEFAULT|GPIT_NORMAL|GPIA_ASSOC, hab);
+
+	//    [draw on ptr]
+
+	delete ptr;
+	printer.endDoc("Test Document");
+
+	
+
+	5. The Dialog Subsystem
+	
+	The dialog handling is quite sophisticated, but very simple to  use:
+for  most dialog windows it is not necessary to write a message handling
+function because dialogs derived  from PMModalDialog or PMModelessDialog
+receive automatically from them most of the normal  processing  involved
+in  dialog  functions.   It  is  only  necessary  to build a table which
+connects each dialog control to  a  C++ data structure; the following is
+an example of a simple dialog box with two entry fields connected to two
+char arrays in a C++ structure (dlgsize):
+
+	struct _dlgsize { // define and create dlgsize
+		char sx[10];
+		char sy[10];
+	} dlgsize;
+	// create table which connects each control (the DSIZE... macros
+	// are defined in an include file common to the .cpp and .rc sources)
+	// to the members of the _dlgsize structure
+	static PMControlMap ctrlmap[]={ 
+		cmEntryField(DSIZE_EF_SX,_dlgsize,sx)
+		cmEntryField(DSIZE_EF_SY,_dlgsize,sy)
+		cmEnd(DSIZE_EF_SX)   // set default active control
+	};
+	// initalize the dlgsize structure
+	sprintf(dlgsize.sx,"%d",100);
+	sprintf(dlgsize.sy,"%d",100);
+	// create a dialog box, using the dlgsize structure as data area for
+	// storing the user's inputs.
+	PMModalDialog sizedlg(HWND_DESKTOP,hwnd,DLG_SIZE,ctrlmap,&dlgsize);
+	int ret=sizedlg.createWin();
+	if (ret) {
+		// use data in dlgsize...
+	}
+
+	If very 'interactive' dialogs are needed you can just derive a class
+from one of the PMDialog...  classes and add the needed functionalities.
+The PMDialog class (base  for  PMModelessDialog  and  PMModalDialog)  is
+derived  from the PMWin class and adds only a functions and data members
+typical of dialog windows; it inherits form PMWin all standard functions
+(inline and virtual).
+
+	The  File  and  Font   system   default   dialog  windows  are  also
+encapsulated, and it is possible to change their behaviour just  as  for
+normal dialogs.
+
+	The  dialog  window keeps a list of PMControl objects which refer to
+the dialog controls.  PMControl is  inherited  from PMWin, so all inline
+functions are inherited form PMWin.   PMControl  has  also  two  virtual
+functions (get and set) which permit to get and set the control specific
+data in an uniform and control-independent way.
+	The first implementation of the PMControl class used to set the USER
+window pointer to  the  address  of  the PMControl object; unfortunately
+some of the control don't allow to set the USER window pointer,  and  so
+the  controlFromID  function  must use a different technique to retrieve
+the pointer to the PMControl  object  (the  pointer is also mantained in
+the control list structure, and a linear search is performed  each  time
+the pointer to the control is requested.)
+
+
+	6. The IPF Help Subsystem
+	
+	Support for managing the help subsystem is provided.  There are five
+procedures trough which help panels	can be showed:
+
+1. Help on menuitems: the user presses F1 while on a menu selection.
+2. Dialog controls: the user presses F1 or the Help button while in
+   a dialog box, and the help must be context-sensitive to the single
+   control, or, otherwise, must be at least specific to the dialog
+   window.
+
+1. and 2. are automatically handled by the system (remember that the
+   dialogs must be owned by the client window, NOT by the frame window
+   of the application).
+
+3. Help from the Help pull-down menus (Index, General, Using, Keys)
+   automagically handled by the system, except for the Keys help
+   panel query (HM_QUERY_KEYS_HELP) which must be answered by the 
+   application (the active keys may change during the execution of 
+   the program).
+
+4. Common Dialog Boxes: the font and file dialogs send a WM_HELP message
+   to the owner, which activates the extended help panel for the dialog.
+   Control-specific panels for the common dialog boxes are not yet 
+   supported.
+   
+5. Help from Message Boxes, handled trough the help Hook function
+   (must be defined and set by the application).
+
+	Notes:
+	
+	All  the HM_* messages are handled via the helpmsg virtual function,
+while the WM_HELP message is handled via the help function.
+
+	The hook  function  must  process  only  help  requests  done in the
+message boxes.  This means that it must check the usTopic  parameter  to
+see  if  it  comes from a message box.  If it does, a message is sent to
+the Help Instance to show the help panel of the message box.  If it does
+not, the hook function  must  *not*  process  the  help request (see the
+example program).
+
+
+	7. Threads
+	
+	It is very easy to use secondary threads with PM++: see provadlg.cpp
+for an example of separate print  thread.   The case of a separate paint
+thread for the client window is more interesting:  see  bg_paint.cpp for 
+an example of this. 
+
+	8. Know Bugs
+	
+	None. (!)
+
+
+	9. Important notice
+
+	This library is provided AS IS with no warranty that  it  will  meet
+your needs or perform as expected and with no support from my side.
+
+				   This is freeware software.  
+	
+	You  can  modify  or  use  this  code  as you wish, provided that my
+portion of the  code  reamins  freeware  (i.e.   available to anyone, in
+source code form) and that you keep my notice at the beginning  of  each
+file.
+
+	If  you  discover  bugs  or if you want to help me in developing new
+versions of the library, you can contact me at:
+
+	Giovanni Iachello
+	giac@dei.unipd.it
+
+	on the Internet or at:
+
+	Giovanni Iachello
+	2:333/300.22 
+
+	on Fidonet.
+
+
+	10. Bibliography
+	
+	"OS/2 Presentation Manager Programming", Charles Petzold, Ziff-Davis
+Press, 1994. ISBN 1-56276-123-4
+
+	"The Art of OS/2 2.1 C Programming", Panov, Salomon and Panov,
+Wiley-Qed, 1993. ISBN 0-471-58802-4
+
+	"Windows++", Paul DiLascia, Addison Wesley, 1992. ISBN 0-201-60891-X
+	
+	"The Hitchhikers Guide To the Galaxy", Douglas Adams
+	
+	And also other  very  interesting  magazines and pubblications, like
+the EDMI/2 free electronic OS/2 programmer's magazine  (kudos  to  Larry
+Salomon Jr.!), and many programming examples on the various OS/2 support
+sites on the internet.  A special "thanks!" must go to  Eberhard Mattes,
+for his excellent work on the EmTex and EMX packages.
+	
+	
+
+	11. Biographical notes
+	
+	The  author  of this class library is me, Giovanni Iachello.  I'm 21
+years old and  I'm  a  3rd  year  Software  Engineering student at Padua
+University  in  Padua,  Italy.   My  hobbies  include  skiing,   playing
+role-play   games,  listening  to  *good*  music,  programming  (!)  and
+discovering this strange world.
+
+
+
+

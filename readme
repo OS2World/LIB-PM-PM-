@@ -1,0 +1,36 @@
+
+
+	PM++ 0.16
+	1995 by G.Iachello
+
+	This is freeware. You can modify or use this code as you wish,
+provided that my portion of the code reamins freeware (ie available 
+to anyone, in listing form) and that you keep my notice at the beginning 
+of each file.
+
+    This archive contains the PM++ class library by G.Iachello version 0.15
+    There is a makefile for building the whole thing.
+    
+    You'll need: 
+        emx 0.9a rev. 3 
+        dmake
+        
+    To install this package, edit the beginning of the makefile and set
+the directory definitions to point to your directories. (This is not 
+necessary if the emx dir is in the root of the default drive). Then type:
+
+    dmake all
+    
+	to build the library, dll and example program.
+
+
+	Note: To build the help file for the example program, you'll need 
+the IPF compiler, and the IPF preprocessor by Larry Salomon (a public domain
+program found on the hobbes archive).
+
+	I can be reached at the following addresses:
+	
+	internet: giac@dei.unipd.it (Giovanni Iachello)
+	fidonet: Giovanni Iachello 2:333/300.22
+	
+    
